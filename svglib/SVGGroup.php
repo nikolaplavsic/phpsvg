@@ -27,12 +27,13 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * ----------------------------------------------------------------------
  */
-class SVGClipPath extends SVGShape
+namespace Dampfklon\phpsvg;
+class SVGGroup extends SVGShape
 {
 
     public static function getInstance( $id )
     {
-        $rect = new SVGClipPath( '<clippath></clippath>' );
+        $rect = new SVGGroup( '<g></g>' );
         $rect->setId( $id );
 
         return $rect;

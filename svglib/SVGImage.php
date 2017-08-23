@@ -27,6 +27,7 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * ----------------------------------------------------------------------
  */
+namespace Dampfklon\phpsvg;
 class SVGImage extends SVGShapeEX
 {
 

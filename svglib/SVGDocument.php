@@ -36,24 +36,6 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  * ----------------------------------------------------------------------
  */
-//include all clsses needed by lib
-//TODO autoload
-include('xmlelement.php'); //extends SimpleXmlElement
-include('svgstyle.php'); //generic shape
-include('svgshape.php'); //generic shape
-include('svgshapeex.php'); //extended shape
-include('svgpath.php'); //path object
-include('svgline.php'); //line object
-include('svgrect.php'); //rect object
-include('svgcircle.php'); //circle object
-include('svgellipse.php'); //ellipse object
-include('svgtext.php'); //text object
-include('svgimage.php'); //image object suports embed image
-include('svglineargradient.php'); //gradient
-include('svgradialgradient.php'); //gradient
-include('svgstop.php'); //one color/stop of
-include('svggroup.php'); //group
-include('svgclippath.php'); //clippath
 /**
  *
 
@@ -63,7 +45,7 @@ include('svgclippath.php'); //clippath
  * http://blog.jondh.me.uk/2010/10/resetting-namespaced-attributes-using-simplexml/
  * http://www.w3.org/TR/SVG/
  */
-
+namespace Dampfklon\phpsvg;
 class SVGDocument extends SVGShape
 {
 

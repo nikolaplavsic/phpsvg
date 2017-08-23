@@ -1,18 +1,15 @@
 <?php
-
 /**
  *
- * Description: Implementation of text object
+ * Description: Implementation of radial Gradient.
  *
  * Blog: http://trialforce.nostaljia.eng.br
  *
- * Started at Mar 11, 2010
- *
- * @version 0.1
+ * Started at Nov 13, 2011
  *
  * @author Eduardo Bonfandini
  *
- * -----------------------------------------------------------------------
+ *-----------------------------------------------------------------------
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as published
  *   by the Free Software Foundation; either version 3 of the License, or
@@ -27,23 +24,18 @@
  *   License along with this program; if not, access
  *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- * ----------------------------------------------------------------------
+ *----------------------------------------------------------------------
  */
-class SVGText extends SVGShape
+namespace Dampfklon\phpsvg;
+class SVGRadialGradient extends SVGLinearGradient
 {
-
-    public static function getInstance( $x, $y, $id, $text, $style = null )
+    public static function getInstance( $id, array $stops )
     {
-        $t = new SVGText( '<text></text>' );
-        $t->setX( $x );
-        $t->setY( $y );
-        $t->setId( $id );
-        $t->setAttribute( 'style', $style );
-        $t->addChild( 'tspan', $text );
+        $gradient = new SVGRadialGradient( '<radialGradient></radialGradient>' );
+        $gradient->setId( $id );
+        $gradient->setStops( $stops );
 
-        return $t;
+        return $gradient;
     }
-
 }
-
 ?>

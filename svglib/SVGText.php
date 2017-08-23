@@ -1,17 +1,18 @@
 <?php
+
 /**
  *
- * Description: Implementation of Path.
+ * Description: Implementation of text object
  *
  * Blog: http://trialforce.nostaljia.eng.br
  *
- * Started at Mar 18, 2010
+ * Started at Mar 11, 2010
  *
  * @version 0.1
  *
  * @author Eduardo Bonfandini
  *
- *-----------------------------------------------------------------------
+ * -----------------------------------------------------------------------
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as published
  *   by the Free Software Foundation; either version 3 of the License, or
@@ -26,35 +27,24 @@
  *   License along with this program; if not, access
  *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *----------------------------------------------------------------------
+ * ----------------------------------------------------------------------
  */
-
-class SVGPath extends SVGShape
+namespace Dampfklon\phpsvg;
+class SVGText extends SVGShape
 {
-    /**
-     * Get a instance of a Path.
-     *
-     * @param string or array $d the points
-     * @param string $id of element
-     * @param string or SVGStyle object $style of element
-     * 
-     * @return SVGPath
-     */
-    public static function getInstance( $d, $id, $style )
+
+    public static function getInstance( $x, $y, $id, $text, $style = null )
     {
-        $path = new SVGPath('<path></path>');
+        $t = new SVGText( '<text></text>' );
+        $t->setX( $x );
+        $t->setY( $y );
+        $t->setId( $id );
+        $t->setAttribute( 'style', $style );
+        $t->addChild( 'tspan', $text );
 
-        //if is as array make implode to glue it
-        if ( is_array( $d ) )
-        {
-            $d = implode( ' ', $d);
-        }
-
-        $path->setAttribute('d', $d);
-        $path->setId( $id );
-        $path->setAttribute( 'style', $style );
-
-        return $path;
+        return $t;
     }
+
 }
+
 ?>

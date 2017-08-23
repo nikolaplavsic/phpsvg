@@ -26,6 +26,7 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *----------------------------------------------------------------------
  */
+namespace Dampfklon\phpsvg;
 class SVGLine extends SVGShapeEx
 {
     public static function getInstance( $x1, $y1, $x2, $y2, $id = null , $style = null )

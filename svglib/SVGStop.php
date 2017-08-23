@@ -28,6 +28,7 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *----------------------------------------------------------------------
  */
+namespace Dampfklon\phpsvg;
 class SVGStop extends XmlElement
 {
     public static function getInstance( $id = null, $style = null, $offset = null )

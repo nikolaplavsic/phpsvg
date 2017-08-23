@@ -1,11 +1,13 @@
 <?php
 /**
  *
- * Description: Implementation of Rect.
+ * Description: Implementation of Path.
  *
  * Blog: http://trialforce.nostaljia.eng.br
  *
- * Started at Mar 11, 2010
+ * Started at Mar 18, 2010
+ *
+ * @version 0.1
  *
  * @author Eduardo Bonfandini
  *
@@ -17,7 +19,7 @@
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See the
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Library General Public License for more details.
  *
  *   You should have received a copy of the GNU Library General Public
@@ -26,40 +28,33 @@
  *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *----------------------------------------------------------------------
  */
-class SVGRect extends SVGShapeEx
+namespace Dampfklon\phpsvg;
+class SVGPath extends SVGShape
 {
-    public static function getInstance( $x, $y, $id, $width, $height, $style = null )
-    {
-        $rect = new SVGRect('<rect></rect>');
-
-        $rect->setX( $x );
-        $rect->setY( $y );
-        $rect->setWidth( $width );
-        $rect->setHeight( $height );
-        $rect->setId( $id );
-        $rect->setStyle($style);
-
-        return $rect;
-    }
-    
     /**
-     * Define the round of rect
+     * Get a instance of a Path.
+     *
+     * @param string or array $d the points
+     * @param string $id of element
+     * @param string or SVGStyle object $style of element
      * 
-     * @param integer $rx the round
+     * @return SVGPath
      */
-    public function setRound( $rx )
+    public static function getInstance( $d, $id, $style )
     {
-        $this->addAttribute('rx', $rx );
-    }
-    
-    /** 
-     * Return the round of rect
-     *  
-     * @return integer return the round
-     */
-    public function getRound()
-    {
-        return $this->getAttribute('rx');
+        $path = new SVGPath('<path></path>');
+
+        //if is as array make implode to glue it
+        if ( is_array( $d ) )
+        {
+            $d = implode( ' ', $d);
+        }
+
+        $path->setAttribute('d', $d);
+        $path->setId( $id );
+        $path->setAttribute( 'style', $style );
+
+        return $path;
     }
 }
 ?>

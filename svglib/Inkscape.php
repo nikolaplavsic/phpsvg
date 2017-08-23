@@ -201,6 +201,7 @@
  *
  * Implemented for Inkscape-0.48.0
  */
+namespace Dampfklon\phpsvg;
 class Inkscape
 {
     /**
