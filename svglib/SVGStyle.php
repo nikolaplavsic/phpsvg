@@ -234,7 +234,7 @@ class SVGStyle
     protected static function fromCamelCase($str)
     {
         $str[0] = strtolower($str[0]);
-        return preg_replace('/([A-Z])/e', "'-' . strtolower('\\1')", $str);
+        return preg_replace_callback('/([A-Z])/', function ($hit) {return "-".strtolower($hit[0]);}, $str);
     }
 
     /**
@@ -247,7 +247,7 @@ class SVGStyle
      */
     protected static function toCamelCase($str)
     {
-        return preg_replace('/-([a-z])/e', "strtoupper('\\1')", $str);
+        return preg_replace_callback('/-([a-z])/', function ($hit) {return strtoupper($hit[0]);}, $str);
     }
 }
 ?>
