@@ -30,7 +30,7 @@
  * ----------------------------------------------------------------------
  */
 namespace Dampfklon\phpsvg;
-class XmlElement extends SimpleXMLElement
+class XmlElement extends \SimpleXMLElement
 {
 
     /**
