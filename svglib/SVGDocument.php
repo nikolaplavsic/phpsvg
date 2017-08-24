@@ -81,7 +81,7 @@ class SVGDocument extends SVGShape
      *
      * @return SVGDocument
      */
-    public static function getInstance( $filename = null, $SVGClass = 'SVGDocument' )
+    public static function getInstance( $filename = null, $SVGClass = 'Dampfklon\phpsvg\SVGDocument' )
     {
         if ( !$SVGClass )
         {
@@ -416,7 +416,7 @@ class SVGDocument extends SVGShape
 
         $image = new Imagick();
 
-        $ok = $image->readImageBlob( $this->asXML() );
+        $ok = $image->readImageBlob( $this->asXML(null, false) );
 
         if ( $ok )
         {
