@@ -389,8 +389,6 @@ class SVGDocument extends SVGShape
      */
     public function exportInkscape( $filename, $width = null, $height = null )
     {
-        include_once 'inkscape.php'; //support export using inkscape
-
         $format = SVGDocument::getFileExtension( $filename );
         $inkscape = new Inkscape( $this );
         $inkscape->setSize( $width, $height );
