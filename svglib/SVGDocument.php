@@ -412,7 +412,7 @@ class SVGDocument extends SVGShape
             throw new Exception( 'Imagemagick class not found. Please install it.' );
         }
 
-        $image = new Imagick();
+        $image = new \Imagick();
 
         $ok = $image->readImageBlob( $this->asXML(null, false) );
 
