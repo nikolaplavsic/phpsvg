@@ -269,7 +269,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on click in this shape
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnclick($script)
     {
@@ -279,7 +279,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on focus in
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnFocusIn($script)
     {
@@ -289,7 +289,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on focus out
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnFocusOut($script)
     {
@@ -299,7 +299,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on active
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnActivate($script)
     {
@@ -309,7 +309,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on mouse down
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnMouseDown($script)
     {
@@ -319,7 +319,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on mouse up
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnMouseUp($script)
     {
@@ -329,7 +329,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on mouse over
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnMouseOver($script)
     {
@@ -339,7 +339,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on mouse move
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnMouseMove($script)
     {
@@ -349,7 +349,7 @@ class SVGShape extends XMLElement
     /**
      * Define the script execute on mouse out
      * 
-     * @param text $script
+     * @param string $script
      */
     public function addOnMouseOut($script)
     {
