@@ -1,46 +1,52 @@
 <?php
-/**
+/*
+ * This file is part of the PhpSvg package.
  *
- * Description: Implementation of Rect.
+ * @author Eduardo Bonfandini <trialforce@gmail.com>
+ * @author Dampfklon <me@dampfklon.d>
+ * @author Nikola Plavšić <nikolaplavsic@gmail.com>
  *
- * Blog: http://trialforce.nostaljia.eng.br
- *
- * Started at Mar 11, 2010
- *
- * @author Eduardo Bonfandini
- *
- *-----------------------------------------------------------------------
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as published
- *   by the Free Software Foundation; either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See the
- *   GNU Library General Public License for more details.
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, access
- *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
- *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *----------------------------------------------------------------------
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-namespace Dampfklon\phpsvg;
+
+namespace NPlavsic\PhpSvg;
+
+/**
+ * SVGRect class
+ *
+ * API for rectangle objects
+ *
+ * @version 0.9
+ * @since 0.1
+ *
+ * @uses NPlavsic\PhpSvg\SVGShapeEx
+ * @uses Nplavsic\PhpSvg\SVGStyle
+ */
 class SVGRect extends SVGShapeEx
 {
-    public static function getInstance( $x, $y, $id, $width, $height, $style = null )
+     /**
+     * Construct a rect
+     *
+     * @param integer $x the x position of rect
+     * @param integer $y the y position of rect
+     * @param string $id the id of element
+     * @param integer $width the width of rect
+     * @param integer $height the height of rect
+     * @param string|SVGStyle $style style of element
+     *
+     * @return void
+     */
+    public function __construct($x, $y, $id, $width, $height, $style = null)
     {
-        $rect = new SVGRect('<rect></rect>');
+        $this->createNewElement('<rect></rect>');
 
-        $rect->setX( $x );
-        $rect->setY( $y );
-        $rect->setWidth( $width );
-        $rect->setHeight( $height );
-        $rect->setId( $id );
-        $rect->setStyle($style);
-
-        return $rect;
+        $this->setX( $x );
+        $this->setY( $y );
+        $this->setWidth( $width );
+        $this->setHeight( $height );
+        $this->setId( $id );
+        $this->setStyle($style);
     }
     
     /**

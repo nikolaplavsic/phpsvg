@@ -1,46 +1,53 @@
 <?php
-/**
+/*
+ * This file is part of the PhpSvg package.
  *
- * Description: Implementation of Line.
+ * @author Eduardo Bonfandini <trialforce@gmail.com>
+ * @author Dampfklon <me@dampfklon.d>
+ * @author Nikola Plavšić <nikolaplavsic@gmail.com>
  *
- * Blog: http://trialforce.nostaljia.eng.br
- *
- * Started at nov 13, 2011
- *
- * @author Eduardo Bonfandini
- *
- *-----------------------------------------------------------------------
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as published
- *   by the Free Software Foundation; either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   See the
- *   GNU Library General Public License for more details.
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, access
- *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
- *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *----------------------------------------------------------------------
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-namespace Dampfklon\phpsvg;
+
+namespace NPlavsic\PhpSvg;
+
+/**
+ * SVGLine class
+ *
+ * API for line objects
+ *
+ * @version 0.9
+ * @since 0.1
+ *
+ * @uses NPlavsic\PhpSvg\SVGShapeEx
+ * @uses Nplavsic\PhpSvg\SVGStyle
+ */
 class SVGLine extends SVGShapeEx
 {
-    public static function getInstance( $x1, $y1, $x2, $y2, $id = null , $style = null )
+
+    /**
+     * Construct a line
+     *
+     * @param integer $x1 x position for line start
+     * @param integer $y1 y position for line start
+     * @param integer $x2 x position for line end
+     * @param integer $y2 y position for line end
+     * @param string $id the id of element
+     * @param SVGStyle $style style of element
+     *
+     * @return void
+     */
+    public function __construct( $x1, $y1, $x2, $y2, $id = null , $style = null )
     {
-        $rect = new SVGLine('<line></line>');
+        $this->createNewElement('<line></line>');
 
-        $rect->setX1( $x1 );
-        $rect->setX2( $x2 );
-        $rect->setY1( $y1 );
-        $rect->setY2( $y2 );
-        $rect->setId( $id );
-        $rect->setStyle( $style );
-
-        return $rect;
+        $this->setX1( $x1 );
+        $this->setX2( $x2 );
+        $this->setY1( $y1 );
+        $this->setY2( $y2 );
+        $this->setId( $id );
+        $this->setStyle( $style );
     }
 
     /**
@@ -123,4 +130,3 @@ class SVGLine extends SVGShapeEx
         return $this->getAttribute('y2');
     }
 }
-?>

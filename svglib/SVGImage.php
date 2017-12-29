@@ -1,46 +1,48 @@
 <?php
+/*
+ * This file is part of the PhpSvg package.
+ *
+ * @author Eduardo Bonfandini <trialforce@gmail.com>
+ * @author Dampfklon <me@dampfklon.d>
+ * @author Nikola Plavšić <nikolaplavsic@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace NPlavsic\PhpSvg;
 
 /**
+ * SVGImage class
+ * API for image objects
  *
- * Description: Image implementation
+ * @version 0.9
+ * @since 0.1
  *
- * Blog: http://trialforce.nostaljia.eng.br
- *
- * Started at Mar 11, 2010
- *
- * @author Eduardo Bonfandini
- *
- * -----------------------------------------------------------------------
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as published
- *   by the Free Software Foundation; either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Library General Public License for more details.
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, access
- *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
- *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- * ----------------------------------------------------------------------
+ * @uses NPlavsic\PhpSvg\SVGShapeEx
  */
-namespace Dampfklon\phpsvg;
 class SVGImage extends SVGShapeEX
 {
 
-    public static function getInstance( $x, $y, $id, $filename, $embed = true )
+    /**
+     * Construct an image
+     *
+     * @param integer $x the x position of image
+     * @param integer $y the y position of image
+     * @param string $id the id of element
+     * @param string $filename path to image
+     * @param boolean $embed flag for embeding the image
+     *
+     * @return void
+     */
+    public function __constructor( $x, $y, $id, $filename, $embed = true )
     {
-        $image = new SVGImage( '<image></image>' );
+        $this->createNewElement('<image></image>');
 
-        $image->setX( $x );
-        $image->setY( $y );
-        $image->setId( $id );
-        $image->setImage( $filename, $embed );
-
-        return $image;
+        $this->setX( $x );
+        $this->setY( $y );
+        $this->setId( $id );
+        $this->setImage( $filename, $embed );
     }
 
     /**
@@ -115,5 +117,3 @@ class SVGImage extends SVGShapeEX
     }
 
 }
-
-?>

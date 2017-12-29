@@ -1,45 +1,46 @@
 <?php
-/**
+/*
+ * This file is part of the PhpSvg package.
  *
- * Description: Implementation of stop, used inside Linear Gradient.
+ * @author Eduardo Bonfandini <trialforce@gmail.com>
+ * @author Dampfklon <me@dampfklon.d>
+ * @author Nikola Plavšić <nikolaplavsic@gmail.com>
  *
- * Blog: http://trialforce.nostaljia.eng.br
- *
- * Started at Aug 1, 2011
- *
- * @version 0.1
- *
- * @author Eduardo Bonfandini
- *
- *-----------------------------------------------------------------------
- *   This program is free software; you can redistribute it and/or modify
- *   it under the terms of the GNU Library General Public License as published
- *   by the Free Software Foundation; either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU Library General Public License for more details.
- *
- *   You should have received a copy of the GNU Library General Public
- *   License along with this program; if not, access
- *   http://www.fsf.org/licensing/licenses/lgpl.html or write to the
- *   Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- *----------------------------------------------------------------------
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-namespace Dampfklon\phpsvg;
+
+namespace NPlavsic\PhpSvg;
+
+/**
+ * SVGStop class
+ *
+ * API for gradient stop objects
+ *
+ * @version 0.9
+ * @since 0.1
+ *
+ * @uses NPlavsic\PhpSvg\XmlElement
+ * @uses Nplavsic\PhpSvg\SVGStyle
+ */
 class SVGStop extends XmlElement
 {
-    public static function getInstance( $id = null, $style = null, $offset = null )
+    /**
+     * Construct a gradient stop
+     *
+     * @param string $id the id of element
+     * @param string|SVGStyle $style style of element
+     * @param float $offset stop offset
+     *
+     * @return void
+     */
+    public function __construct( $id = null, $style = null, $offset = null )
     {
-        $stop = new SVGStop( '<stop></stop>' );
+        $this->createNewElement()( '<stop></stop>' );
 
-        $stop->setId($id);
-        $stop->setStyle($style);
-        $stop->setOffset($offset);
-
-        return $stop;
+        $this->setId($id);
+        $this->setStyle($style);
+        $this->setOffset($offset);
     }
 
     /**
@@ -137,4 +138,3 @@ class SVGStop extends XmlElement
         return intval( $this->getAttribute('offset') );
     }
 }
-?>
