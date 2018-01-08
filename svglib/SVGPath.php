@@ -25,28 +25,4 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGPath extends SVGShape
 {
-
-    /**
-     * Construct a path
-     *
-     * @param string or array $d the points
-     * @param string $id of element
-     * @param string|SVGStyle object $style of element
-     *
-     * @return void
-     */
-    public function __construct($d, $id, $style)
-    {
-        $this->createNewElement( '<path></path>' );
-
-        // if is as array make implode to glue it
-        if (is_array($d)) {
-            $d = implode(' ', $d);
-        }
-
-        $path->setAttribute('d', $d);
-        $path->setId($id);
-        $path->setAttribute('style', $style);
-
-    }
 }

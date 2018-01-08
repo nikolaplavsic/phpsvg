@@ -24,36 +24,15 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGCircle extends SVGShapeEx
 {
-    /**
-     * Construct a circle
-     * 
-     * @param integer $cx the center x
-     * @param integer $cy the center y
-     * @param integer $radius the radius of circle
-     * @param string $id the id of element
-     * @param SVGStyle $style style of element
-     * 
-     * @return void 
-     */
-    public function __construct( $cx, $cy, $radius, $id = null, $style = null )
-    {
-        $this->createNewElement('<circle></circle>');
-
-        $this->setCx( $cx );
-        $this->setCy( $cy );
-        $this->setRadius($radius);
-        $this->setId( $id );
-        $this->setStyle($style);
-    }
     
     /**
      * Define the center x
-     * 
-     * @param integer $cx 
+     *
+     * @param integer $cx
      */
-    public function setCx( $cx )
+    public function setCx($cx)
     {
-        $this->addAttribute('cx', $cx );
+        $this->addAttribute('cx', $cx);
     }
     
     /**
@@ -68,12 +47,12 @@ class SVGCircle extends SVGShapeEx
     
     /**
      * Define the center y
-     * 
-     * @param integer $cy 
+     *
+     * @param integer $cy
      */
-    public function setCy( $cy )
+    public function setCy($cy)
     {
-        $this->addAttribute('cy', $cy );
+        $this->addAttribute('cy', $cy);
     }
     
     /**
@@ -88,20 +67,20 @@ class SVGCircle extends SVGShapeEx
     
     /**
      * Define the radius of circle
-     * 
-     * @param integer $radius 
+     *
+     * @param integer $radius
      */
-    public function setRadius( $radius )
+    public function setRadius($radius)
     {
-        $this->addAttribute('r', $radius );
+        $this->addAttribute('r', $radius);
     }
 
     /**
      * Return the radius of circle
-     * 
+     *
      * @return integer the radius of circle
      */
-    public function getRadius( )
+    public function getRadius()
     {
         return $this->getAttribute('r');
     }

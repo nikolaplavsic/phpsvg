@@ -25,27 +25,6 @@ class SVGImage extends SVGShapeEX
 {
 
     /**
-     * Construct an image
-     *
-     * @param integer $x the x position of image
-     * @param integer $y the y position of image
-     * @param string $id the id of element
-     * @param string $filename path to image
-     * @param boolean $embed flag for embeding the image
-     *
-     * @return void
-     */
-    public function __constructor( $x, $y, $id, $filename, $embed = true )
-    {
-        $this->createNewElement('<image></image>');
-
-        $this->setX( $x );
-        $this->setY( $y );
-        $this->setId( $id );
-        $this->setImage( $filename, $embed );
-    }
-
-    /**
      * Return the binary data of image
      *
      * @return bin the binary data of image
@@ -55,15 +34,12 @@ class SVGImage extends SVGShapeEX
     {
         $info = $this->getImageData();
 
-        if ( $info->encode == 'base64' )
-        {
+        if ($info->encode == 'base64') {
             //get embed image
-            return base64_decode( $info->binary );
-        }
-        else
-        {
+            return base64_decode($info->binary);
+        } else {
             //get file of system
-            return file_get_contents( $this->getAttribute( 'xlink:href' ) );
+            return file_get_contents($this->getAttribute('xlink:href'));
         }
     }
 
@@ -75,15 +51,14 @@ class SVGImage extends SVGShapeEX
      */
     public function getImageData()
     {
-        $image = $this->getAttribute( 'xlink:href' );
+        $image = $this->getAttribute('xlink:href');
 
-        if ( stripos( $image, 'data:' ) === 0 )
-        {
-            $explode = explode( ',', $image );
-            $mime = explode( ';', $explode[ 0 ] );
+        if (stripos($image, 'data:') === 0) {
+            $explode = explode(',', $image);
+            $mime = explode(';', $explode[ 0 ]);
 
             $img = new stdClass();
-            $img->mime = str_replace( 'data:', '', $mime[ 0 ] );
+            $img->mime = str_replace('data:', '', $mime[ 0 ]);
             $img->encode = $mime[ 1 ];
             $img->binary = $explode[ 1 ];
 
@@ -99,21 +74,22 @@ class SVGImage extends SVGShapeEX
      *
      * @param string $filename
      * @param string $embed if is to embed or not
+     * @param string $relative if to make path to file relative
      */
-    public function setImage( $filename, $embed = true )
+    public function setImage($filename, $embed = true, $relative = false)
     {
-        if ( $embed )
-        {
+        if ($embed) {
             //get the sizes of image using gd
-            $imageSize = getimagesize( $filename, $imageSize );
-            $mime = mime_content_type( $filename );
-            $file = base64_encode( file_get_contents( $filename ) );
+            $imageSize = getimagesize($filename, $imageSize);
+            $mime = mime_content_type($filename);
+            $file = base64_encode(file_get_contents($filename));
             $filename = 'data:' . $mime . ';base64,' . $file;
-            $this->setWidth( $imageSize[ 0 ] ); //define the size of image
-            $this->setHeight( $imageSize[ 1 ] );
+            $this->setWidth($imageSize[ 0 ]); //define the size of image
+            $this->setHeight($imageSize[ 1 ]);
+        } elseif ($relative) {
+            $filename = basename($filename);
         }
 
-        $this->addAttribute( "xlink:href", $filename, 'http://www.w3.org/1999/xlink' );
+        $this->addAttribute("xlink:href", $filename, 'http://www.w3.org/1999/xlink');
     }
-
 }

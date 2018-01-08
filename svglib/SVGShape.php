@@ -15,7 +15,7 @@ namespace NPlavsic\PhpSvg;
 /**
  * Basic SVG Shape
  * All other svg elements will extend this basic shape
- * 
+ *
  *
  * @version 0.9
  * @since 0.1
@@ -213,7 +213,7 @@ class SVGShape extends XMLElement
         if ($ty) {
             $this->addTransform("translate($tx,$ty)");
         } else {
-            $this->addTransform("translate($tx);");
+            $this->addTransform("translate($tx)");
         }
     }
 

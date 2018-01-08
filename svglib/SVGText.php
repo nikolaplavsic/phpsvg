@@ -27,23 +27,75 @@ class SVGText extends SVGShape
 {
 
     /**
-     * Construct a text
+     * tspan object for text wrapping
      *
-     * @param integer $x the x position of text
-     * @param integer $y the y position of text
-     * @param string $id the id of element
-     * @param string $text content for text element
-     * @param string|SVGStyle $style style of element
-     *
-     * @return void
+     * @var SVGShape
      */
-    public function __construct( $x, $y, $id, $text, $style = null )
+    public $span;
+
+    /**
+     * Set font-size attribute
+     *
+     * @param float $size - font size
+     *
+     * @return SVGText - instance
+     */
+    public function setFontSize($size)
     {
-        $this->createNewElement('<text>'.$text.'</text>');
-        $this->setX( $x );
-        $this->setY( $y );
-        $thist->setId( $id );
-        $this->setAttribute( 'style', $style );
+        $this->setAttribute('font-size', $size);
+        return $this;
     }
 
+    /**
+     * Set font-wight attribute
+     *
+     * @param string|integer $weight - font weight
+     *
+     * @return SVGText - instance
+     */
+
+    public function setFontWeight($weight)
+    {
+        $this->setAttribute('font-weight', $weight);
+        return $this;
+    }
+
+    /**
+     * Set font-style attribute
+     *
+     * @param string $style - font style
+     *
+     * @return SVGText - instance
+     */
+    public function setFontStyle($style)
+    {
+        $this->setAttribute('font-style', $style);
+        return $this;
+    }
+
+    /**
+     * Set font-family attribute
+     *
+     * @param string $font - font family
+     *
+     * @return SVGText - instance
+     */
+    public function setFontFamily($font)
+    {
+        $this->setAttribute('font-family', $font);
+        return $this;
+    }
+
+    /**
+     * Set color (fill) attribute
+     *
+     * @param string $color - font color
+     *
+     * @return SVGText - instance
+     */
+    public function setFill($color)
+    {
+        $this->setAttribute('fill', $color);
+        return $this;
+    }
 }

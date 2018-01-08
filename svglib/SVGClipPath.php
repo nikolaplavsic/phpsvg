@@ -23,25 +23,10 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGClipPath extends SVGShape
 {
-
-    /**
-     * Construct a clippath
-     *
-     * @param string $id
-     *
-     * @return void
-     */
-    public function __construct( $id )
+    public function addShape($append)
     {
-        $this->createNewElement('<clippath></clippath>');
-        $this->setId( $id );
-    }
-
-    public function addShape( $append )
-    {
-        $this->append( $append );
+        $this->append($append);
 
         return $this;
     }
-
 }

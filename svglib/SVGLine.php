@@ -27,72 +27,48 @@ class SVGLine extends SVGShapeEx
 {
 
     /**
-     * Construct a line
-     *
-     * @param integer $x1 x position for line start
-     * @param integer $y1 y position for line start
-     * @param integer $x2 x position for line end
-     * @param integer $y2 y position for line end
-     * @param string $id the id of element
-     * @param SVGStyle $style style of element
-     *
-     * @return void
-     */
-    public function __construct( $x1, $y1, $x2, $y2, $id = null , $style = null )
-    {
-        $this->createNewElement('<line></line>');
-
-        $this->setX1( $x1 );
-        $this->setX2( $x2 );
-        $this->setY1( $y1 );
-        $this->setY2( $y2 );
-        $this->setId( $id );
-        $this->setStyle( $style );
-    }
-
-    /**
      * Define the x 1 of line
-     * 
-     * @param int $x1 
+     *
+     * @param int $x1
      */
-    public function setX1( $x1 )
+    public function setX1($x1)
     {
-        $this->addAttribute('x1', $x1 );
+        $this->addAttribute('x1', $x1);
     }
     
     /**
      * Define the x 2 of line
-     * 
+     *
      * @param int $x2
      */
-    public function setX2( $x2 )
+    public function setX2($x2)
     {
-        $this->addAttribute('x2', $x2 );
+        $this->addAttribute('x2', $x2);
     }
     
     /**
      * Define the y 1 of line
-     * 
-     * @param int $y1 
+     *
+     * @param int $y1
      */
-    public function setY1( $y1 )
+    public function setY1($y1)
     {
-        $this->addAttribute('y1', $y1 );
+        $this->addAttribute('y1', $y1);
     }
     
     /**
      * Define the y 2 of line
-     * 
-     * @param int $y2 
+     *
+     * @param int $y2
      */
-    public function setY2( $y2 )
+    public function setY2($y2)
     {
-        $this->addAttribute('y2', $y2 );
+        $this->addAttribute('y2', $y2);
     }
     
     /**
      * Return x1 attribute
-     * 
+     *
      * @return integer x1 attribute
      */
     public function getX1()
@@ -102,7 +78,7 @@ class SVGLine extends SVGShapeEx
     
     /**
      * Return x2 attribute
-     * 
+     *
      * @return integer x2 attribute
      */
     public function getX2()
@@ -112,7 +88,7 @@ class SVGLine extends SVGShapeEx
     
     /**
      * Return y1 attribute
-     * 
+     *
      * @return integer y1 attribute
      */
     public function getY1()
@@ -122,7 +98,7 @@ class SVGLine extends SVGShapeEx
     
     /**
      * Return y2  attribute
-     * 
+     *
      * @return integer y2 attribute
      */
     public function getY2()

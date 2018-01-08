@@ -13,11 +13,12 @@
 namespace NPlavsic\PhpSvg;
 
 use SimpleXMLElement;
+use Log;
 
 /**
  * Extend the functionalities of SimpleXMLElement
  * for use with svg elements
- * 
+ *
  * NOTE: From version 0.9 this class doesn't extend SimpleXMLElement
  *       SimpleXMLElement is used as property. This design
  *       is taken out of need to have own constructor.
@@ -27,7 +28,7 @@ use SimpleXMLElement;
  *
  * @uses SimpleXMLElement
  */
-class XMLElement
+class XMLElement extends SimpleXMLElement
 {
 
     /**
@@ -42,132 +43,7 @@ class XMLElement
      *
      * @var boolean if is to generate identificator automagic
      */
-	public static $useAutoId = true;
-
-	/**
-	 * XML element instance to be used
-	 * 
-	 * @var \SimpleXMLElement
-	 */
-	protected $xml;
-	
-	/**
-	 * Load new SimpleXMLElement with provided content
-	 * 
-	 * @param string $content xml content
-	 * 
-	 * @return void
-	 */
-	protected function createNewElement($content)
-	{
-		$this->xml = new SimpleXMLElement($content);
-	}
-
-	/**
-	 * Wrapper for xml element function addAttribute()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.addattribute.php
-	 * 
-	 */
-	public function addAttribute($name, $value = null, $namespace = null)
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		$this->xml->addAttribute($name, $value, $namespace);
-	}
-
-	/**
-	 * Wrapper for xml element function addChild()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.addchild.php
-	 * 
-	 */
-	public function addChild($name, $value = null, $namespace = null)
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		return $this->xml->addChild($name, $value, $namespace);
-	}
-
-	/**
-	 * Wrapper for xml element function attributes()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.attributes.php
-	 * 
-	 */
-	public function attributes()
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-
-		return $this->xml->attributes();
-	}
-
-	/**
-	 * Wrapper for xml element function children()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.children.php
-	 * 
-	 */
-	public function children($namespace = null, $is_prefix = false)
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		return $this->xml->children($namespace, $is_prefix);
-	}
-
-	/**
-	 * Wrapper for xml element function count()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.count.php
-	 * 
-	 */
-	public function count()
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		return $this->xml->count();
-	}
-
-	/**
-	 * Wrapper for xml element function getName()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.getname.php
-	 * 
-	 */
-	public function getName()
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		return $this->xml->getName();
-	}
-
-	/**
-	 * Wrapper for xml element function getNamespaces()
-	 * 
-	 * @link http://php.net/manual/en/simplexmlelement.getnamespaces.php
-	 * 
-	 */
-	public function getNamespaces($recursive = false)
-	{
-		if(!$this->xml) {
-			throw new \Exception('You need to create an xml element first.');
-		}
-		
-		return $this->xml->getNamespaces($recursive);
-	}
-
+    public static $useAutoId = true;
 
     /**
      * Remove a attribute
@@ -274,29 +150,46 @@ class XMLElement
     public function append(XMLElement $append)
     {
         // list all namespaces used in append object
-        $namespaces = $append->getNameSpaces();
+        $namespaces = $append->getNamespaces();
 
+        // $appendee = new XMLElement();
         // get all childs
-        if (strlen(trim(strval($append)) == 0)) {
-            $xml = $this->addChild($append->getName(), ' ');
-
+        // Log::info('Append element -> ' . $append->getName() . '; value -> ' . (string)$append);
+        // Log::info('Checking value [appendValue, trimmedVal, strlen, empty]', [(string)$append, trim((string)$append)])
+        if (strlen(trim((string)$append)) == 0) {
+            $appendee = $this->addChild($append->getName(), ' ');
+            // $appendee->setElement($xml);
             foreach ($append->children() as $child) {
-                $xml->append($child);
+                // $child = new XMLElement($child);
+                $appendee->append($child);
             }
         } else {
             // add one child
-            $xml = $this->addChild($append->getName(), strval($append) . ' ');
+            $name = $append->getName();
+            $string = htmlspecialchars((string) $append);
+            Log::info('Appending string to apendee -> ' . $string);
+            //add one child
+            $appendee = $this->addChild($name, $string);
+            // $appendee->setElement($xml);
         }
-
+        
         // add simple attributes
         foreach ($append->attributes() as $attribute => $value) {
-            $xml->addAttribute($attribute, $value);
-        }
+            // if($attribute == 'id' || $attribute == 'width' || $attribute == 'height') {
+            //     var_dump($attribute);
+            //     var_dump((string)$value);
+            // }
 
+            $appendee->addAttribute($attribute, $value);
+        }
+        
         // add attributes with namespace example xlink:href
         foreach ($namespaces as $index => $namespace) {
+            if (empty($index)) {
+                continue;
+            }
             foreach ($append->attributes($namespace) as $attribute => $value) {
-                $xml->addAttribute($index . ':' . $attribute, $value, $namespace);
+                $appendee->addAttribute($index . ':' . $attribute, $value, $namespace);
             }
         }
     }
@@ -532,7 +425,13 @@ class XMLElement
      */
     public function asXML($filename = null, $humanReadable = true)
     {
+        // Log::info(parent::asXML());
+        // if ($this->xml === null) {
+        //     throw new \Exception('You need to create an xml element first.');
+        // }
+
         if ($filename) {
+            // $this->xml->asXML($filename);
             parent::asXML($filename);
             return;
             // ----- END -----
@@ -542,12 +441,14 @@ class XMLElement
 
         // define if xml is humanReadable or not
         if ($humanReadable) {
+            // return $this->prettyXML($this->xml->asXML());
             return $this->prettyXML(parent::asXML());
             // ----- END -----
         }
 
 
 
+        // return $this->xml->asXML();
         return parent::asXML();
         // ----- END -----
     }

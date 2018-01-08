@@ -24,25 +24,10 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGGroup extends SVGShape
 {
-    /**
-     * Construct a group
-     *
-     * @param string $id the id of element
-     *
-     * @return void
-     */
-
-    public function __construct( $id )
+    public function addShape($append)
     {
-        $this->createNewElement()('<g></g>');
-        $this->setId( $id );
-    }
-
-    public function addShape( $append )
-    {
-        $this->append( $append );
+        $this->append($append);
 
         return $this;
     }
-
 }

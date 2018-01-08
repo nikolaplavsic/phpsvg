@@ -25,19 +25,4 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGRadialGradient extends SVGLinearGradient
 {
-
-    /**
-     * Construct a radial gradient
-     *
-     * @param string $id the id of element
-     * @param array $stops gradient stops (NPlavsic\PhpSvg\SVGStop)
-     *
-     * @return void
-     */
-    public function __construct($id, array $stops)
-    {
-        $this->createNewElement('<radialGradient></radialGradient>');
-        $this->setId($id);
-        $this->setStops($stops);
-    }
 }

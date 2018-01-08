@@ -25,37 +25,19 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGStop extends XmlElement
 {
-    /**
-     * Construct a gradient stop
-     *
-     * @param string $id the id of element
-     * @param string|SVGStyle $style style of element
-     * @param float $offset stop offset
-     *
-     * @return void
-     */
-    public function __construct( $id = null, $style = null, $offset = null )
-    {
-        $this->createNewElement()( '<stop></stop>' );
-
-        $this->setId($id);
-        $this->setStyle($style);
-        $this->setOffset($offset);
-    }
 
     /**
      * Define the style of element, can be a SVGStyle element or an string
      *
      * @param SVGStyle $style SVGStyle element or an string
      */
-    public function setStyle( $style)
+    public function setStyle($style)
     {
-        if ( !$style )
-        {
+        if (!$style) {
             $style = new SVGStyle();
         }
 
-        $this->setAttribute('style', $style );
+        $this->setAttribute('style', $style);
     }
 
     /**
@@ -63,9 +45,9 @@ class SVGStop extends XmlElement
      *
      * @return SVGStyle style of element
      */
-    public function getStyle( )
+    public function getStyle()
     {
-        return new SVGStyle( $this->getAttribute( 'style') );
+        return new SVGStyle($this->getAttribute('style'));
     }
 
     /**
@@ -73,12 +55,12 @@ class SVGStop extends XmlElement
      *
      * @param string $color
      */
-    public function setColor( $color )
+    public function setColor($color)
     {
         $style = $this->getStyle();
         $style->stopColor = $color;
 
-        $this->setStyle( $style );
+        $this->setStyle($style);
     }
 
     /**
@@ -97,12 +79,12 @@ class SVGStop extends XmlElement
      *
      * @param int $opacity
      */
-    public function setOpacity( $opacity = 1 )
+    public function setOpacity($opacity = 1)
     {
         $style = $this->getStyle();
-        $style->stopOpacity = intval( $opacity);
+        $style->stopOpacity = intval($opacity);
 
-        $this->setStyle( $style );
+        $this->setStyle($style);
     }
 
     /**
@@ -112,7 +94,7 @@ class SVGStop extends XmlElement
      */
     public function getOpacity()
     {
-        return intval( $this->getStyle()->opacity );
+        return intval($this->getStyle()->opacity);
     }
 
     /**
@@ -121,20 +103,20 @@ class SVGStop extends XmlElement
      *
      * @param float $offset
      */
-    public function setOffset( $offset )
+    public function setOffset($offset)
     {
-        $this->setAttribute('offset', floatval( $offset ) );
+        $this->setAttribute('offset', floatval($offset));
     }
 
     /**
      * Return the offset of the stop
-     * 
+     *
      * Offset variates from 0 to 1, passing by floating value between it.
-     * 
+     *
      * @return float
      */
-    public function getOffset( )
+    public function getOffset()
     {
-        return intval( $this->getAttribute('offset') );
+        return intval($this->getAttribute('offset'));
     }
 }

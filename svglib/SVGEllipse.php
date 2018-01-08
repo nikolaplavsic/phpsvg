@@ -25,37 +25,15 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGEllipse extends SVGShapeEx
 {
-    /**
-     * Construct an ellipse
-     * 
-     * @param integer $cx the center x
-     * @param integer $cy the center y
-     * @param integer $radiusX the X radius of ellipse
-     * @param integer $radiusY the Y radius of ellipse
-     * @param string $id the id of element
-     * @param SVGStyle $style style of element
-     * 
-     * @return void 
-     */
-    public function __construct( $cx, $cy, $radiusX, $radiusY, $id = null, $style = null )
-    {
-        $this->createNewElement('<ellipse></ellipse>');
-
-        $this->setCx( $cx );
-        $this->setCy( $cy );
-        $this->setRadius($radiusX, $radiusY );
-        $this->setId( $id );
-        $this->setStyle($style);
-    }
     
     /**
      * Define the center x
-     * 
-     * @param integer $cx 
+     *
+     * @param integer $cx
      */
-    public function setCx( $cx )
+    public function setCx($cx)
     {
-        $this->addAttribute('cx', $cx );
+        $this->addAttribute('cx', $cx);
     }
     
     /**
@@ -70,12 +48,12 @@ class SVGEllipse extends SVGShapeEx
     
     /**
      * Define the center y
-     * 
-     * @param integer $cy 
+     *
+     * @param integer $cy
      */
-    public function setCy( $cy )
+    public function setCy($cy)
     {
-        $this->addAttribute('cy', $cy );
+        $this->addAttribute('cy', $cy);
     }
     
     /**
@@ -90,31 +68,31 @@ class SVGEllipse extends SVGShapeEx
     
     /**
      * Define the radius of circle
-     * 
-     * @param integer $radius 
+     *
+     * @param integer $radius
      */
-    public function setRadius( $radiusX, $radiusY )
+    public function setRadius($radiusX, $radiusY)
     {
-        $this->addAttribute('rx', $radiusX );
-        $this->addAttribute('ry', $radiusY );
+        $this->addAttribute('rx', $radiusX);
+        $this->addAttribute('ry', $radiusY);
     }
 
     /**
      * Return the x radius of circle
-     * 
+     *
      * @return integer the radius of circle
      */
-    public function getRadiusX( )
+    public function getRadiusX()
     {
         return $this->getAttribute('rx');
     }
     
     /**
      * Return the y radius of circle
-     * 
+     *
      * @return integer the radius of circle
      */
-    public function getRadiusY( )
+    public function getRadiusY()
     {
         return $this->getAttribute('ry');
     }

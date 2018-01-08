@@ -36,88 +36,17 @@ class SVGDocument extends SVGShape
     const EXTENSION_COMPACT = 'svgz';
     const HEADER = 'image/svg+xml';
     const EXPORT_TYPE_IMAGE_MAGIC = 'imagick';
-	const EXPORT_TYPE_INKSCAPE = 'inkscape';
+    const EXPORT_TYPE_INKSCAPE = 'inkscape';
 
 
-	/**
+    /**
      * Path to a file that is opened
      *
      * @var string
      */
     public $filename;
-	
-	// ----------------------------------------------------------------------------------------------
-    // CONSTRUCTOR
-    // ----------------------------------------------------------------------------------------------
-
-    /**
-     * Create new SVGDocument
-     *
-	 * @param $filename the file to load
-	 * 
-     * @return void
-     */
-    public function __construct($filename = null)
-    {
-		$this->filename = $filename;
-
-		if($this->filename !== null) {
-			$this->openFile($this->filename);
-			return;
-		}
-
-		$this->openBlank();
-	}
-	
-	/**
-	 * Open and load svg file
-	 * @param $filename the file to load
-	 * 
-	 * @throws \Exception if file iz gzipped and there is no gzip support
-	 * @throws \Exception if file conent can't be loaded
-	 * @return void
-	 */
-	public function openFile($filename)
-	{
-		// if is svgz use compres.zlib to load the compacted SVG
-		if (self::getFileExtension($filename) == self::EXTENSION_COMPACT) {
-			
-			// verify if zlib is installed
-			if (!function_exists('gzopen')) {
-				throw new Exception('GZip support not installed.');
-			}
-
-			$filename = 'compress.zlib://' . $filename;
-		}
-
-		// get the content
-		$content = file_get_contents($filename);
-
-		// throw error if not found
-		if (!$content) {
-			throw new Exception('Impossible to load content of file: ' . $filename);
-		}
-
-		$this->createNewElement($content);
-	}
-
-	/**
-	 * Open new file in A4 format
-	 * 
-	 * @return void
-	 */
-	public function openBlank()
-	{
-		//create clean SVG
-		$this->createNewElement('<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg></svg>');
-
-		//define the default parameters A4 pageformat
-		$this->setWidth('210mm');
-		$this->setHeight('297mm');
-		$this->setVersion(self::VERSION);
-		$this->setAttribute('xmlns', self::XMLNS);
-
-	}
+    
+    
 
     /**
      * Return the extension of a filename
@@ -140,36 +69,6 @@ class SVGDocument extends SVGShape
     {
         header('Content-type: ' . self::HEADER);
         echo $this->asXML();
-    }
-
-    /**
-     * Export the object as xml text, OR xml file.
-     *
-     * If the file extension is svgz, the function will save it correctely;
-     *
-     * @param string $filename the file to save, is optional, you can output to a var
-     * @return string the xml string if filename is not passed
-     */
-    public function asXML($filename = null, $humanReadable = true)
-    {
-        // if is svgz use compres.zlib to load the compacted SVG
-        if (SVGDocument::getFileExtension($filename) == self::EXTENSION_COMPACT) {
-            // verify if zlib is installed
-            if (!function_exists('gzopen')) {
-                throw new Exception('GZip support not installed.');
-            }
-
-            $filename = 'compress.zlib://' . $filename;
-        }
-
-        $xml = parent::asXML(null, $humanReadable);
-
-        // need to do it, if pass a null filename it return an error
-        if ($filename) {
-            return file_put_contents($filename, $xml);
-        }
-
-        return $xml;
     }
 
     /**

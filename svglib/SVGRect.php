@@ -25,43 +25,20 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGRect extends SVGShapeEx
 {
-     /**
-     * Construct a rect
-     *
-     * @param integer $x the x position of rect
-     * @param integer $y the y position of rect
-     * @param string $id the id of element
-     * @param integer $width the width of rect
-     * @param integer $height the height of rect
-     * @param string|SVGStyle $style style of element
-     *
-     * @return void
-     */
-    public function __construct($x, $y, $id, $width, $height, $style = null)
-    {
-        $this->createNewElement('<rect></rect>');
-
-        $this->setX( $x );
-        $this->setY( $y );
-        $this->setWidth( $width );
-        $this->setHeight( $height );
-        $this->setId( $id );
-        $this->setStyle($style);
-    }
     
     /**
      * Define the round of rect
-     * 
+     *
      * @param integer $rx the round
      */
-    public function setRound( $rx )
+    public function setRound($rx)
     {
-        $this->addAttribute('rx', $rx );
+        $this->addAttribute('rx', $rx);
     }
     
-    /** 
+    /**
      * Return the round of rect
-     *  
+     *
      * @return integer return the round
      */
     public function getRound()
@@ -69,4 +46,3 @@ class SVGRect extends SVGShapeEx
         return $this->getAttribute('rx');
     }
 }
-?>

@@ -25,31 +25,16 @@ namespace NPlavsic\PhpSvg;
  */
 class SVGLinearGradient extends XmlElement
 {
-    
-    /**
-     * Construct a linear gradient
-     *
-     * @param string $id the id of element
-     * @param array $stops gradient stops (NPlavsic\PhpSvg\SVGStop)
-     *
-     * @return void
-     */
-    public function __construct( $id, array $stops )
-    {
-        $this->createNewElement( '<linearGradient></linearGradient>' );
-        $this->setId( $id );
-        $this->setStops( $stops );
-    }
 
     /**
      * Add one stop object.
      * Do not control the offset.
-     * 
+     *
      * @param SVGStop $stop
      */
-    public function addStop( SVGStop $stop )
+    public function addStop(SVGStop $stop)
     {
-        $this->append( $stop );
+        $this->append($stop);
     }
 
     /**
@@ -57,26 +42,22 @@ class SVGLinearGradient extends XmlElement
      *
      * @param array of SVGStop
      */
-    public function setStops( $stops )
+    public function setStops($stops)
     {
-        if ( is_array( $stops ) )
-        {
+        if (is_array($stops)) {
             //automagic controls the offset
             $offset = 0;
-            $stopCount = count( $stops )-1;
+            $stopCount = count($stops)-1;
 
-            foreach ( $stops as $line => $stop )
-            {
-                if ( $stop instanceof SVGStop )
-                {
-                    if ( !$stop->getOffset() )
-                    {
-                        $c = 1 * ( $offset / $stopCount );
+            foreach ($stops as $line => $stop) {
+                if ($stop instanceof SVGStop) {
+                    if (!$stop->getOffset()) {
+                        $c = 1 * ($offset / $stopCount);
                         $offset++;
-                        $stop->setOffset( $c );
+                        $stop->setOffset($c);
                     }
 
-                    $this->addStop( $stop );
+                    $this->addStop($stop);
                 }
             }
         }
