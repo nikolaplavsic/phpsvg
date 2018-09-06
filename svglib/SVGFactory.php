@@ -39,9 +39,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGCircle($cx, $cy, $radius, $id = null, $style = null)
+    public function SVGCircle($cx, $cy, $radius, $id = null, $style = null, $options = 0)
     {
-        $obj = new SVGCircle('<circle></circle>');
+        $obj = new SVGCircle('<circle></circle>', $options);
         $obj->setCx($cx);
         $obj->setCy($cy);
         $obj->setRadius($radius);
@@ -58,9 +58,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGClipPath($id)
+    public function SVGClipPath($id, $options)
     {
-        $obj = new SVGClipPath('<clippath></clippath>');
+        $obj = new SVGClipPath('<clippath></clippath>', $options = 0);
         $obj->setId($id);
 
         return $obj;
@@ -73,13 +73,13 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGDocument($filename = null)
+    public function SVGDocument($filename = null, $options = 0)
     {
         if ($filename !== null) {
-            return $this->openFile($filename);
+            return $this->openFile($filename, $options);
         }
 
-        return $this->openBlank();
+        return $this->openBlank($options);
     }
 
     /**
@@ -102,7 +102,7 @@ class SVGFactory
      * @throws \Exception if file conent can't be loaded
      * @return void
      */
-    protected function openFile($filename)
+    protected function openFile($filename, $options = 0)
     {
         // if is svgz use compres.zlib to load the compacted SVG
         if (self::getFileExtension($filename) == self::EXTENSION_COMPACT) {
@@ -123,7 +123,7 @@ class SVGFactory
             throw new Exception('Impossible to load content of file: ' . $filename);
         }
 
-        return new SVGDocument($content);
+        return new SVGDocument($content, $options);
     }
 
     /**
@@ -131,10 +131,10 @@ class SVGFactory
      *
      * @return void
      */
-    protected function openBlank()
+    protected function openBlank($options = 0)
     {
         //create clean SVG
-        $doc = new SVGDocument('<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg></svg>');
+        $doc = new SVGDocument('<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg></svg>', $options);
 
         //define the default parameters A4 pageformat
         $doc->setWidth('210mm');
@@ -157,9 +157,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGEllipse($cx, $cy, $radiusX, $radiusY, $id = null, $style = null)
+    public function SVGEllipse($cx, $cy, $radiusX, $radiusY, $id = null, $style = null, $options = 0)
     {
-        $obj = new SVGEllipse('<ellipse></ellipse>');
+        $obj = new SVGEllipse('<ellipse></ellipse>', $options);
 
         $obj->setCx($cx);
         $obj->setCy($cy);
@@ -177,9 +177,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGGroup($id)
+    public function SVGGroup($id, $options = 0)
     {
-        $obj = new SVGGroup('<g></g>');
+        $obj = new SVGGroup('<g></g>', $options);
         $obj->setId($id);
 
         return $obj;
@@ -196,13 +196,13 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGImage($x, $y, $id, $filename, $embed = true, $relative = false)
+    public function SVGImage($x, $y, $id, $filename, $embed = true, $options = 0)
     {
-        $obj = new SVGImage('<image></image>');
+        $obj = new SVGImage('<image></image>', $options);
         $obj->setX($x);
         $obj->setY($y);
         $obj->setId($id);
-        $obj->setImage($filename, $embed, $relative);
+        $obj->setImage($filename, $embed);
 
         return $obj;
     }
@@ -219,9 +219,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGLine($x1, $y1, $x2, $y2, $id = null, $style = null)
+    public function SVGLine($x1, $y1, $x2, $y2, $id = null, $style = null, $options = 0)
     {
-        $obj = new SVGLine('<line></line>');
+        $obj = new SVGLine('<line></line>', $options);
 
         $obj->setX1($x1);
         $obj->setX2($x2);
@@ -241,9 +241,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGLinearGradient($id, array $stops)
+    public function SVGLinearGradient($id, array $stops, $options = 0)
     {
-        $obj = new SVGLinearGradient('<linearGradient></linearGradient>');
+        $obj = new SVGLinearGradient('<linearGradient></linearGradient>', $options);
         $obj->setId($id);
         $obj->setStops($stops);
 
@@ -259,9 +259,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGPath($d, $id, $style)
+    public function SVGPath($d, $id, $style, $options = 0)
     {
-        $obj = new SVGPath('<path></path>');
+        $obj = new SVGPath('<path></path>', $options);
 
         // if is as array make implode to glue it
         if (is_array($d)) {
@@ -283,9 +283,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGRadialGradient($id, array $stops)
+    public function SVGRadialGradient($id, array $stops, $options = 0)
     {
-        $obj = new SVGRadialGradient('<radialGradient></radialGradient>');
+        $obj = new SVGRadialGradient('<radialGradient></radialGradient>', $options);
 
         $obj->setId($id);
         $obj->setStops($stops);
@@ -305,9 +305,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGRect($x, $y, $id, $width, $height, $style = null)
+    public function SVGRect($x, $y, $id, $width, $height, $style = null, $options = 0)
     {
-        $obj = new SVGRect('<rect></rect>');
+        $obj = new SVGRect('<rect></rect>', $options);
 
         $obj->setX($x);
         $obj->setY($y);
@@ -328,9 +328,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGStop($id = null, $style = null, $offset = null)
+    public function SVGStop($id = null, $style = null, $offset = null, $options = 0)
     {
-        $obj = new SVGStop('<stop></stop>');
+        $obj = new SVGStop('<stop></stop>', $options);
 
         $obj->setId($id);
         $obj->setStyle($style);
@@ -350,9 +350,9 @@ class SVGFactory
      *
      * @return void
      */
-    public function SVGText($x, $y, $id, $text, $style = null)
+    public function SVGText($x, $y, $id, $text, $style = null, $options = 0)
     {
-        $obj = new SVGText('<text>'.$text.'</text>');
+        $obj = new SVGText('<text>'.$text.'</text>', $options);
         
         $obj->setX($x);
         $obj->setY($y);
@@ -361,4 +361,5 @@ class SVGFactory
 
         return $obj;
     }
+
 }

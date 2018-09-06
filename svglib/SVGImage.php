@@ -21,7 +21,7 @@ namespace NPlavsic\PhpSvg;
  *
  * @uses NPlavsic\PhpSvg\SVGShapeEx
  */
-class SVGImage extends SVGShapeEX
+class SVGImage extends SVGShapeEx
 {
 
     /**
@@ -55,12 +55,12 @@ class SVGImage extends SVGShapeEX
 
         if (stripos($image, 'data:') === 0) {
             $explode = explode(',', $image);
-            $mime = explode(';', $explode[ 0 ]);
+            $mime = explode(';', $explode[0]);
 
             $img = new stdClass();
-            $img->mime = str_replace('data:', '', $mime[ 0 ]);
-            $img->encode = $mime[ 1 ];
-            $img->binary = $explode[ 1 ];
+            $img->mime = str_replace('data:', '', $mime[0]);
+            $img->encode = $mime[1];
+            $img->binary = $explode[1];
 
             return $img;
         }
@@ -76,7 +76,7 @@ class SVGImage extends SVGShapeEX
      * @param string $embed if is to embed or not
      * @param string $relative if to make path to file relative
      */
-    public function setImage($filename, $embed = true, $relative = false)
+    public function setImage($filename, $embed = true)
     {
         if ($embed) {
             //get the sizes of image using gd
@@ -84,12 +84,13 @@ class SVGImage extends SVGShapeEX
             $mime = mime_content_type($filename);
             $file = base64_encode(file_get_contents($filename));
             $filename = 'data:' . $mime . ';base64,' . $file;
-            $this->setWidth($imageSize[ 0 ]); //define the size of image
-            $this->setHeight($imageSize[ 1 ]);
-        } elseif ($relative) {
-            $filename = basename($filename);
+            $this->setWidth($imageSize[0]); //define the size of image
+            $this->setHeight($imageSize[1]);
+            return;
         }
 
         $this->addAttribute("xlink:href", $filename, 'http://www.w3.org/1999/xlink');
     }
+
+
 }
