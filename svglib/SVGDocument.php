@@ -109,6 +109,16 @@ class SVGDocument extends SVGShape
     }
 
     /**
+     * Returns the width of page
+     *
+     * @return string the width of page
+     */
+    public function getWidth()
+    {
+        return $this->getAttribute('width');
+    }
+
+    /**
      * Set the view box attribute, used to make SVG resizable in browser.
      *
      * @param string $startX start x coordinate
@@ -139,9 +149,22 @@ class SVGDocument extends SVGShape
      *
      * @return string the width of page
      */
-    public function getWidth()
+    public function getViewBox()
     {
-        return $this->getAttribute('width');
+        $viewBox = $this->getAttribute('viewBox');
+
+        if (!$viewBox || !is_string($viewBox)) {
+            return false;
+        }
+
+        $viewBoxCoords = explode(' ', $viewBox);
+
+        return [
+            'x' => $viewBoxCoords[0],
+            'y' => $viewBoxCoords[1],
+            'width' => $viewBoxCoords[2],
+            'height' => $viewBoxCoords[3],
+        ];
     }
 
     /**
